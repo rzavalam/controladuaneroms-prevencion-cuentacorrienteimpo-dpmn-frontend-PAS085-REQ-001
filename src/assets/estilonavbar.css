@@ -1,0 +1,95 @@
+      /* wizard with arrows */
+
+    .wizard {
+        background-color: white;
+        padding: 0.2em 0em 0.2em 0.2em;
+    }
+
+        .wizard div.step {
+            padding: 5px 50px 2px;
+            position: relative;
+            display: inline-block;
+            text-decoration: none;
+            min-width: 33%;
+            margin-left: 5px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 14px;
+            color: #928f8f;
+            background: #d8e5f0;
+        }
+
+        .wizard div.step div.stepTitle,
+        .wizard div.step div.stepDesc {
+          font-size: 12px;
+          text-align: left;
+        }
+
+        .wizard div.step:first-child {
+            margin-left: 0;
+        }
+
+        .wizard div.step:before {
+            width: 0;
+            height: 0;
+            border-top: 30px inset transparent;
+            border-bottom: 30px inset transparent;
+            border-left: 30px solid #FFFFFF;
+            position: absolute;
+            content: "";
+            top: 0;
+            left: 0;
+        }
+
+        .wizard div.step:after {
+            width: 0;
+            height: 0;
+            border-top: 30px inset transparent;
+            border-bottom: 30px inset transparent;
+            border-left: 30px solid #d8e5f0;
+            position: absolute;
+            content: "";
+            top: 0;
+            right: -30px;
+            z-index: 2;
+        }
+
+        .wizard div.step:first-child:before,
+        .wizard div.step:last-child:after {
+            border: none;
+        }
+
+        .wizard div.step:first-child {
+            -webkit-border-radius: 4px 0 0 4px;
+            -moz-border-radius: 4px 0 0 4px;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .wizard div.step:last-child {
+            -webkit-border-radius: 0 4px 4px 0;
+            -moz-border-radius: 0 4px 4px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .wizard div.step.current {
+          background-color: #3E95D6;
+          color: #ffffff;
+        }
+
+        .wizard div.step.current:after {
+          border-left: 30px solid #3E95D6;
+        }
+
+fieldset.scheduler-border {
+  border: 2px groove #3E95D6 !important;
+    padding: 0 1.4em 1.4em 1.4em !important;
+    margin: 0 0 1.5em 0 !important;
+}
+
+legend.scheduler-border {
+  width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
+    font-size: inherit;
+    font-weight: bold;
+}

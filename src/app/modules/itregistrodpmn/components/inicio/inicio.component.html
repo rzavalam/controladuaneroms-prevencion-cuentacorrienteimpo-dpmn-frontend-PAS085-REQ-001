@@ -1,0 +1,55 @@
+<div class="container-fluid">
+  <div class="row p-2">
+      <div class="col">
+          <div class="card">
+              <div class="row">
+                  <div class="col">
+                      <div class="card-header text-white text-center bg-primary">
+                          <strong>Registro de Descarga Provisional de Mercanc&iacute;a Nacionalizada - DPMN</strong>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                      <div class="alert alert-warning" role="alert">
+                          <strong>Aviso!&nbsp;</strong>El presente registro est&aacute; dirigido a Empresas de Transporte Terrestre Nacional o Internacional
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col">
+                      <div class="wizard">
+                          <div class="step" [ngClass]="{'current' : pasoActual >= 1}"  >
+                            <div class="stepTitle">
+                              Paso 1
+                            </div>
+                            <div class="stepDesc">
+                              Datos de la Aduana, control e informaci&oacute;n <br/> de la Empresa y Conductor
+                            </div>
+                          </div>
+                          <div class="step" [ngClass]="{'current' : pasoActual >= 2}">
+                            <div class="stepTitle">
+                              Paso 2
+                            </div>
+                            <div class="stepDesc">
+                              Datos del Comprobante de pago, Carta Porte, <br/> Declaraci&oacute;n
+                            </div>
+                          </div>
+                          <div class="step" [ngClass]="{'current' : pasoActual >= 3}">
+                            <div class="stepTitle">
+                              Paso 3
+                            </div>
+                            <div class="stepDesc">
+                              Archivos adjuntos<br/>&nbsp;
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                  <router-outlet></router-outlet>
+              </div>
+            </div>
+      </div>
+  </div>
+</div>

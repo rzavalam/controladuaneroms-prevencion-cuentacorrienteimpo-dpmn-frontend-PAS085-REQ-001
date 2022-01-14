@@ -1,0 +1,161 @@
+<form id="frmDatosDeclComp" name="frmDatosDeclComp">
+
+  <fieldset class="form-group scheduler-border" >
+    <legend class="scheduler-border">Datos Complementarios</legend>
+    <div class="row">
+      <div class="col-1">
+        <label for="txtOrigen">Origen:</label>
+      </div>
+      <div class="col-5">
+        <p-autoComplete
+          [(ngModel)]="ubigeoSeleccionado" name="selectUbigeo"
+          [suggestions]="ubigeosFiltrados"
+          [inputStyleClass]="ubigeoSeleccionado == null ? 'ng-invalid ng-dirty' : null"
+          [ngClass]="{'is-invalid': ubigeoSeleccionado == null}"
+          (completeMethod)="filtrarUbigeo($event)"
+          [forceSelection]="true"
+          [styleClass]="'autocompletarConDropDown'"
+          field="desDataCat"
+          [dropdown]="true">
+          <ng-template let-ubigeo pTemplate="item">
+            <div class="ubigeo-item">
+              <div>{{ubigeo.desDataCat}}</div>
+            </div>
+          </ng-template>
+        </p-autoComplete>
+        <div
+            *ngIf="ubigeoSeleccionado == null"
+            class="invalid-feedback">
+            Debe ingresar el origen
+        </div>
+      </div>
+      <div class="col-2">
+        <label for="txtObservacion">Observaci&oacute;n:</label>
+      </div>
+      <div class="col-4">
+        <input type="text" class="form-control" id="txtObservacion" name="txtObservacion" maxlength="200" [(ngModel)]="observaciones"  >
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-group scheduler-border" >
+    <legend class="scheduler-border">Datos del Comprobante de Pago / Carta Porte</legend>
+    <div class="row">
+      <p-table [value]="rowsTblComprobante" [paginator]="rowsTblComprobante?.length > 0" [rows]="10"
+        [showCurrentPageReport]="rowsTblComprobante?.length > 0"
+        [rowHover]="true"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+        styleClass="p-datatable-sm"
+        [rowsPerPageOptions]="[10,25,50]"  >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>ID</th>
+                <th>Guía remitente / Carta porte</th>
+                <th>RUC remitente / Empresa</th>
+                <th>Raz&oacute;n Social Remitente</th>
+                <th>Motivo traslado</th>
+                <th>RUC destinatario</th>
+                <th>Raz&oacute;n Social destinatario</th>
+                <th>Destino</th>
+                <th>Acci&oacute;n</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr >
+            <td colspan = "9" class="text-center">No hay registros</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-comprobante>
+            <tr>
+                <td>{{comprobante.correlativo}}</td>
+                <td>{{comprobante.numero}}</td>
+                <td>{{comprobante.remitenteRuc}}</td>
+                <td>{{comprobante.remitenteRazonSocial}}</td>
+                <td>{{comprobante.motivoTraslado}}</td>
+                <td>{{comprobante.destinatarioRuc}}</td>
+                <td>{{comprobante.destinatarioRazonSocial}}</td>
+                <td>{{comprobante.destino}}</td>
+                <td>
+                  <button type="button" class="btn btn-link" (click)="eliminarComprobante(comprobante)">
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </td>
+            </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </fieldset>
+
+  <fieldset class="form-group scheduler-border" >
+    <legend class="scheduler-border">Datos de la declaraci&oacute;n de Importaci&oacute;n</legend>
+    <div class="row">
+      <p-table [value]="damSeriesDpmn" [paginator]="damSeriesDpmn?.length > 0" [rows]="10" [showCurrentPageReport]="damSeriesDpmn?.length > 0"
+        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+        [rowHover]="true"
+        styleClass="p-datatable-sm" [rowsPerPageOptions]="[10,25,50]">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width: 5%">ID</th>
+                <th style="width: 10%">Declaraci&oacute;n</th>
+                <th style="width: 5%">Serie</th>
+                <th style="width: 10%">Subpartida</th>
+                <th style="width: 20%">Descripci&oacute;n Comercial</th>
+                <th style="width: 10%" class="text-center">Peso Bruto</th>
+                <th style="width: 10%" class="text-center">Peso Neto</th>
+                <th style="width: 10%" class="text-center">Cant. declarada</th>
+                <th style="width: 10%" class="text-center">Cant. retirada</th>
+                <th style="width: 10%" class="text-center">Unidad F&iacute;sica</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+          <tr >
+            <td colspan = "10" class="text-center">No hay registros</td>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-seriedpm let-rowIndex="rowIndex">
+            <tr>
+                <td>{{rowIndex + 1}}</td>
+                <td>{{seriedpm.aduanaDam.codDatacat}}-{{seriedpm.annDam}}-{{seriedpm.regimenDam.codDatacat}}-{{seriedpm.numDam}}</td>
+                <td>{{seriedpm.numSerie}}</td>
+                <td>{{seriedpm.codSubPartida}}</td>
+                <td>{{seriedpm.desComercial}}</td>
+                <td class="text-right">{{seriedpm.mtoPesoBruto}}</td>
+                <td class="text-right">{{seriedpm.mtoPesoNeto}}</td>
+                <td class="text-right">{{seriedpm.cntUnidadFisica}}</td>
+                <td class="text-right">{{seriedpm.cntRetirada}}</td>
+                <td class="text-center">{{seriedpm.unidadFisica.codDatacat}}</td>
+            </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </fieldset>
+
+  <div class="row top-buffer justify-content-center">
+    <div class="col-4">
+      <button type="button" id="btnAddDeclaracion" class="btn btn-primary btn-sm btn-block"
+              (click)="irPageAddDeclaracion()">
+        Agregar Declaraci&oacute;n de Importaci&oacute;n y Comprobante de Pago
+      </button>
+    </div>
+  </div>
+
+  <div class="row top-buffer justify-content-between">
+    <div class="col-2">
+      <button type="button" id="btnAnterior" (click)="irPaginaAnterior()"
+        class="btn btn-outline-success btn-lg btn-block">
+        <i class="bi bi-arrow-left-circle-fill"></i>
+        &nbsp; Retroceder
+      </button>
+    </div>
+    <div class="col-2">
+      <button type="button" id="btnSiguiente" class="btn btn-success btn-lg btn-block"
+       (click) = "irPaginaSiguiente()" >
+        Siguiente &nbsp;
+        <i class="bi bi-arrow-right-circle-fill"></i>
+      </button>
+    </div>
+  </div>
+
+</form>
+<p-toast></p-toast>
+<p-confirmDialog [style]="{width: '50vw'}" [baseZIndex]="10000" [acceptLabel] = "'Si'" [rejectLabel] = "'No'" ></p-confirmDialog>

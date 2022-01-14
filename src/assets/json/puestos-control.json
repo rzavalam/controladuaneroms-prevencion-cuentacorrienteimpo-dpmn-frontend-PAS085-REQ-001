@@ -1,0 +1,37 @@
+[
+  {
+     "codAduana":"019",
+     "puestosControl":[
+        {
+           "codigo":"2251",
+           "descripcion":"Carpitas"
+        }
+     ]
+  },
+  {
+     "codAduana":"172",
+     "puestosControl":[
+        {
+           "codigo":"2111",
+           "descripcion":"Tomasiri"
+        },
+        {
+           "codigo":"2112",
+           "descripcion":"Vila Vila"
+        }
+     ]
+  },
+  {
+     "codAduana":"181",
+     "puestosControl":[
+        {
+           "codigo":"2211",
+           "descripcion":"Ojherani"
+        },
+        {
+           "codigo":"0203",
+           "descripcion":"Sección Atención Fronteriza (Desaguadero)"
+        }
+     ]
+  }
+]

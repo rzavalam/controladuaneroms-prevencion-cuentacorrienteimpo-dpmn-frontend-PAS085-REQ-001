@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class="row p-2">
+      <div class="col">
+          <div class="card">
+              <div class="row">
+                  <div class="col">
+                      <div class="card-header text-white text-center bg-primary">
+                          <strong>Registro de Descarga Provisional de Mercanc&iacute;a Nacionalizada - DPMN</strong>
+                      </div>
+                  </div>
+              </div>
+              <div class="card-body">
+                <div class="row p-2">
+                  <p-table #dt1 [value]="rptaListaCtrlPaso.data" [paginator]="true" [rows]="10"
+                    [showCurrentPageReport]="true" dataKey="numCorrelativo"
+                    currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                    styleClass="p-datatable-sm" [rowHover]="true"
+                    [globalFilterFields]="['aduana.codDatacat', 'puestoControl.codDatacat', 'annPci', 'numPci']"
+                    [rowsPerPageOptions]="[10,25,50]">
+                    <ng-template pTemplate="caption">
+                      <div class="p-d-flex">
+                        <span class="p-input-icon-left p-ml-auto">
+                          <i class="pi pi-search"></i>
+                          <input pInputText type="text" pKeyFilter="pnum" maxlength="21" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar ..." />
+                        </span>
+                      </div>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th style="width: 5%">ID</th>
+                            <th style="width: 15%">Nro. de control de paso
+                            </th>
+                            <th style="width: 5%">Pa&iacute;s placa</th>
+                            <th style="width: 10%">Placa</th>
+                            <th style="width: 10%">Placa carreta</th>
+                            <th style="width: 10%">Flujo veh&iacute;culo</th>
+                            <th style="width: 10%">Tipo control</th>
+                            <th style="width: 10%">Fecha inicio</th>
+                            <th style="width: 5%">Tiempo (horas)</th>
+                            <th style="width: 20%">Funcionario aduanero</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="emptymessage">
+                      <tr>
+                        <td colspan = "10" class="text-center">No hay registros</td>
+                      </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-pci let-rowIndex="rowIndex">
+                        <tr>
+                            <td>{{rowIndex + 1}}</td>
+                            <td>
+                              <a href="javascript:void(0);" (click) = "continuarRegistroDpmn(pci)" class="text-decoration-none">
+                                {{pci.aduana?.codDatacat}}-{{pci.puestoControl?.codDatacat}}-{{pci.annPci}}-{{pci.numPci | number:'10.0' | quitarComma}}
+                              </a>
+                            </td>
+                            <td>{{pci.paisPlaca?.codDatacat}}</td>
+                            <td>{{pci.nomPlaca}}</td>
+                            <td>{{pci.nomPlacaCarreta}}</td>
+                            <td>
+                              <app-icon-flujo-vehiculo [codFlujoVehiculo]="pci.flujoVehiculo?.codDatacat" >
+                              </app-icon-flujo-vehiculo>
+                            </td>
+                            <td>
+                              <svg xmlns="http://www.w3.org/2000/svg" *ngIf="getColorControl(pci) != null" width="32" height="32"
+                                        [attr.fill]="getColorControl(pci)" class="bi bi-circle-fill" viewBox="0 0 16 16">
+                                <circle cx="8" cy="8" r="8"/>
+                              </svg>
+                            </td>
+                            <td>{{pci.fecInicioControl}}</td>
+                            <td>{{pci.tiempoTranscurrido}}</td>
+                            <td>{{pci.codFuncionario}} - {{pci.nomFuncionario}}</td>
+                        </tr>
+                    </ng-template>
+                  </p-table>
+                </div>
+              </div>
+            </div>
+      </div>
+  </div>
+</div>

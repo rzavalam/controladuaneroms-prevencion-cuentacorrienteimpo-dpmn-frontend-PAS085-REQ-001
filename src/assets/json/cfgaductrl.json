@@ -1,0 +1,14 @@
+[
+  {
+  "codAduana": "019",
+  "codPaisesFrontera": ["EC", "CO"]
+  },
+  {
+  "codAduana": "172",
+  "codPaisesFrontera": ["CL"]
+  },
+  {
+  "codAduana": "181",
+  "codPaisesFrontera": ["BO"]
+  }
+]

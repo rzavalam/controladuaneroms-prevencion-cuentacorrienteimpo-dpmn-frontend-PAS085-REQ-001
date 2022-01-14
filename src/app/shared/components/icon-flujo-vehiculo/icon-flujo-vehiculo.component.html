@@ -1,0 +1,6 @@
+<ng-container *ngIf="iconVehiculo != null else tplSinIcono" >
+  <img [attr.src]="rutaIconVehiculo"  />
+</ng-container>
+<ng-template #tplSinIcono>
+{{codFlujoVehiculo}}
+</ng-template>
