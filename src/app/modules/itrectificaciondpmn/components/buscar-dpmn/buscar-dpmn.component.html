@@ -20,12 +20,16 @@
                           <label class="col-form-label">Placa de vehículo:</label>
                         </div>
                         <div class="col-sm-4">
-                            <p-dropdown  [options]="catalogoPais"  formControlName="codPaisPlaca" placeholder="Seleccionar  "
-                             optionValue="codDatacat"  [style] = "{'width':'100%'}">
-                              <ng-template let-pais pTemplate="pais">
-                                <div>{{pais.desDataCat}}</div>
-                              </ng-template>
-                            </p-dropdown>		  
+
+                                                
+                            <select id="selPais" name="selPais" class="form-control form-select" aria-describedby="validationPaisPlaca"
+                            formControlName="codPaisPlaca" placeholder="Seleccionar" [ngClass]="{'is-invalid': frmCtrlCodPaisPlaca.errors?.required}">
+                            <option *ngFor="let pais of catalogoPais" [value]="pais.codDatacat">
+                              {{pais.codDatacat + "-" + pais.desDataCat}}
+                            </option>
+                            </select>
+
+
                          </div>
                         <div class="col-sm-5">
                           <input type="text" class="form-control" id="txtNumeroPlaca" 
