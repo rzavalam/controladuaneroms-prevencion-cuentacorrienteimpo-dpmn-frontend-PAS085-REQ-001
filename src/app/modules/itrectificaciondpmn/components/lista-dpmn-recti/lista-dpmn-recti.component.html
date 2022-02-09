@@ -1,3 +1,88 @@
-<p>lista-dpmn-recti works!</p>
+<div class="container-fluid">
+    <div class="row p-2">
+        <div class="col">
+            <div class="card">
+                <div class="row">
+                    <div class="col">
+                        <div class="card-header text-white text-center bg-primary">
+                            <strong>Rectificaci&oacute;n Descarga Provisional de Mercanc&iacute;a Nacionalizada - DPMN</strong>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="row p-2">
+                      <p-table #dt1 [value]="rptaListaCtrlDpmns.data" [paginator]="true" [rows]="10"
+                        [showCurrentPageReport]="true" dataKey="correlativoDpmn"
+                        currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+                        styleClass="p-datatable-sm" [rowHover]="true"
+                        [globalFilterFields]="['numeroDpmn']"
+                        [rowsPerPageOptions]="[10,25,50]">
+                        <ng-template pTemplate="caption">
+                          <div class="p-d-flex">
+                            <span class="p-input-icon-left p-ml-auto">
+                              <i class="pi pi-search"></i>
+                              <input pInputText type="text" pKeyFilter="pnum" maxlength="21" (input)="dt1.filterGlobal($event.target.value, 'contains')" placeholder="Buscar ..." />
+                            </span>
+                          </div>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>                                
+                                <th style="width: 5%">ID</th>
+                                <th style="width: 15%">Nro. de DPMN</th>
+                                <th style="width: 5%">Pa&iacute;s placa</th>
+                                <th style="width: 10%">Placa</th>
+                                <th style="width: 10%">Placa carreta</th>
+                                <th style="width: 10%">Flujo veh&iacute;culo</th>
+                                <th style="width: 10%">Fecha registro</th>
+                                <th style="width: 5%">Tiempo para anular (horas)</th>
+                                <th style="width: 14%">1er RUC Remitente</th>
+                                <th style="width: 6%">Cantidad series</th>                                
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                          <tr>
+                            <td colspan = "10" class="text-center">No hay registros</td>
+                          </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-dpmn let-rowIndex="rowIndex">
+                            <tr>
+                                
+                                <td>{{rowIndex + 1}}</td>
+                                <td>
+                                  <a href="javascript:void(0);" (click) = "continuarRectificaDpmn(dpmn)" class="text-decoration-none">
+                                    {{dpmn.numeroDpmn}}
+                                  </a>
+                                </td>
+                                <td>{{dpmn.paisPlaca?.codDatacat}}</td>
+                                <td>{{dpmn.nomPlaca}}</td>   
+                                <td>{{dpmn.paisPlacaCarreta?.codDatacat}}</td>   
+                                <td>
+                                  <app-icon-flujo-vehiculo [codFlujoVehiculo]="dpmn.flujoVehiculo?.codDatacat" >
+                                  </app-icon-flujo-vehiculo>
+                                </td>   
+                                <td>{{dpmn.auditoria?.fecRegis}}</td> 
+                                <td>{{dpmn.tiempoAnulacion}}</td>   
+                                <td>{{dpmn.numRucPrimerRemitente}}-{{dpmn.desRazonSocialPrimerRemitente}}</td>  
+                                <td>{{dpmn.cntSeries}}</td>                    
+                            </tr>
+                        </ng-template>
 
-<p>Aqui debe ir los resultados de la busqueda de la DPMN a rectificar</p>
+                      </p-table>
+                    </div>
+                    <div class="row top-buffer justify-content-center" >
+                      <div class="col-2">
+                        <button type="button" id="btnCancelar" class="btn btn-primary btn-block"
+                              (click)="irPageBusquedaInicial()">
+                          <i class="bi bi-x-square-fill"></i>
+                          &nbsp;Cancelar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+              </div>
+        </div>
+    </div>
+  </div>
+
+  <p-toast position="top-right" key="msj"></p-toast>

@@ -15,16 +15,20 @@ import { BuscarRectiDpmnService } from '../../services/buscar-recti-dpmn.service
 import {TableModule} from 'primeng/table';
 import {ButtonModule} from 'primeng/button';
 import {AutoCompleteModule} from 'primeng/autocomplete';
+import {MessagesModule} from 'primeng/messages';
 import {KeyFilterModule} from 'primeng/keyfilter';
 import {ToastModule} from 'primeng/toast';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-import { DialogModule } from 'primeng/dialog';
+import {DatePipe } from '@angular/common'
+import {ConfirmDialogModule } from 'primeng/confirmdialog';
+import {DialogModule } from 'primeng/dialog';
+import {CalendarModule} from 'primeng/calendar';
 import {ProgressSpinnerModule} from 'primeng/progressspinner';
 import {InputTextModule} from 'primeng/inputtext';
-
-import { ItrectificaciondpmnRoutingModule } from './itrectificaciondpmn-routing.module';
-import { BuscarDpmnComponent } from './components/buscar-dpmn/buscar-dpmn.component';
-import { ListaDpmnRectiComponent } from './components/lista-dpmn-recti/lista-dpmn-recti.component';
+import {DropdownModule} from 'primeng/dropdown';
+import {RadioButtonModule } from 'primeng/radiobutton';
+import {ItrectificaciondpmnRoutingModule } from './itrectificaciondpmn-routing.module';
+import {BuscarDpmnComponent } from './components/buscar-dpmn/buscar-dpmn.component';
+import {ListaDpmnRectiComponent } from './components/lista-dpmn-recti/lista-dpmn-recti.component';
 
 
 @NgModule({
@@ -43,12 +47,21 @@ import { ListaDpmnRectiComponent } from './components/lista-dpmn-recti/lista-dpm
     InputTextModule,
     ToastModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropdownModule,
+    RadioButtonModule,
+    CalendarModule,
+    ButtonModule,
+    MessagesModule
+  ],  
+  exports: [
+    ButtonModule
   ],
   providers: [
     CatalogoService,
     PaisesService,
     UbigeoService,
+    DatePipe,
     BuscarRectiDpmnService, {
       provide: APP_ENDPOINT_CONFIG,
       useValue: appEndpointInternet

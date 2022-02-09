@@ -34,6 +34,8 @@ export class ConstantesApp {
 
   static readonly KEY_SESSION_NOMBRE_COMPLETO : string = "nombrecompleto-ctacorriente-impo-dpmn";
 
+  static readonly RESOURCE_PUESTO_CONTROL: string = "/v1/controladuanero/puestoscontrol/";
+
   /**
    * Tamaño máximo en bytes permitdos para un archivo
    * que se desea adjuntar a la DPMN

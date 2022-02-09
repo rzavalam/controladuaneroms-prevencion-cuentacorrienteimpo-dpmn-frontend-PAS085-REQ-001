@@ -33,7 +33,7 @@ import { GuiaRemisionTransp } from 'src/app/model/bean/guia-remision-transp.mode
 
 import { ConstantesApp } from 'src/app/utils/constantes-app';
 
-import {MessageService} from 'primeng/api';
+import { MessageService} from 'primeng/api';
 import { TipoNacionalidad } from 'src/app/model/common/tipo-nacionalidad.enum';
 import { SaldoSerieDam } from 'src/app/model/bean/saldo-serie-dam';
 import { Declaracion } from 'src/app/model/bean/declaracion';
