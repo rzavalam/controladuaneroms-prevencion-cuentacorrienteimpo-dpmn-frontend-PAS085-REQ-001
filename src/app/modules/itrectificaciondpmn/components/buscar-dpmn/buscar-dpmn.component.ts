@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { BuscarRectiDpmnService } from 'src/app/services/buscar-recti-dpmn.service';
 import { AbstractControl,FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { HttpClient} from '@angular/common/http';
-import { PrimeNGConfig, MessageService } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 import { AppEndpointConfig, APP_ENDPOINT_CONFIG } from 'src/app/utils/app-endpoint-config';
 import { Ruc } from 'src/app/model/bean/ruc.model';
 import { CatalogoService } from 'src/app/services/catalogo.service';
@@ -22,8 +22,6 @@ import { Respuesta } from 'src/app/model/common/Respuesta';
 import { ItemDpmnParaRectificar} from 'src/app/model/bean/item-dpmn-para-rectificar.model';
 import { Estado } from 'src/app/model/common/Estado';
 import { DataCatalogo } from 'src/app/model/common/data-catalogo.model';
-import { PuestoControlFuncionario } from 'src/app/model/bean/puesto-control-funcionario';
-import { CatalogoItem } from '../../../../model/bean/catalogo-item';
 
 @Component({
   selector: 'app-buscar-dpmn',
@@ -60,7 +58,6 @@ export class BuscarDpmnComponent implements OnInit {
 
   constructor(private buscarRectiDpmnService : BuscarRectiDpmnService,
               private messageService: MessageService,
-              private config: PrimeNGConfig,
               @Inject(APP_ENDPOINT_CONFIG) appEndPointConfig : AppEndpointConfig,
               private http: HttpClient,
               private formBuilder: FormBuilder,
