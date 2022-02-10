@@ -22,6 +22,8 @@ import { Respuesta } from 'src/app/model/common/Respuesta';
 import { ItemDpmnParaRectificar} from 'src/app/model/bean/item-dpmn-para-rectificar.model';
 import { Estado } from 'src/app/model/common/Estado';
 import { DataCatalogo } from 'src/app/model/common/data-catalogo.model';
+import { PuestoControlFuncionario } from 'src/app/model/bean/puesto-control-funcionario';
+import { CatalogoItem } from '../../../../model/bean/catalogo-item';
 
 @Component({
   selector: 'app-buscar-dpmn',
@@ -55,7 +57,6 @@ export class BuscarDpmnComponent implements OnInit {
   catalogoAduanas: DataCatalogo[] = new Array();
   catalogoRegimen: DataCatalogo[] = new Array();
   catalogoEstado: DataCatalogo[] = new Array();
-  selCodPaisPlaca : string;
 
   constructor(private buscarRectiDpmnService : BuscarRectiDpmnService,
               private messageService: MessageService,
@@ -282,25 +283,6 @@ export class BuscarDpmnComponent implements OnInit {
       paramConsultar.rangoFechaRegistro.fechaFin =  new Date(this.datePipe.transform(this.frmCtrlFechaFin.value,"dd/MM/yyyy"));
     }
 
-
-    /*let paramConsulta = new ParamBusqDpmnParaRectificar();
-    paramConsulta.rucRemitente=this.consultaForm.controls.numeroRucRemitente.value;
-    paramConsulta.placaVehiculo =  new ParamBusqPlacaVehiculo();
-    paramConsulta.placaVehiculo.codPais =this.consultaForm.controls.codPaisPlaca.value;
-    paramConsulta.placaVehiculo.numero = this.consultaForm.controls.numeroPlaca.value;
-    paramConsulta.documento = new ParamBusqDocumento();
-    paramConsulta.documento.codAduana = this.consultaForm.controls.codAduanaDocumento.value;
-    paramConsulta.documento.anio = this.consultaForm.controls.anoDocumento.value;
-    paramConsulta.documento.numero = this.consultaForm.controls.numeroDocumento.value;
-    paramConsulta.declaracion = new ParamBusqDcl();
-    paramConsulta.declaracion.codAduana = this.consultaForm.controls.codAduanaDAM.value;
-    paramConsulta.declaracion.codRegimen = this.consultaForm.controls.codRegimen.value;
-    paramConsulta.declaracion.numero = this.consultaForm.controls.numeroDAM.value;
-    paramConsulta.declaracion.anio = this.consultaForm.controls.anoDAM.value;
-    paramConsulta.rangoFechaRegistro = new ParamBusqRangoFecha();
-    paramConsulta.rangoFechaRegistro.fechaFin =  new Date(this.datePipe.transform(this.consultaForm.controls.fechaFin.value,"dd/MM/yyyy"));
-    paramConsulta.rangoFechaRegistro.fechaInicio = new Date(this.datePipe.transform(this.consultaForm.controls.fechaInicio.value,"dd/MM/yyyy"));*/
-
     console.log(paramConsultar);
 
     this.messageService.clear;
@@ -444,7 +426,13 @@ export class BuscarDpmnComponent implements OnInit {
         });
     }
 
-  
+
+    onChangeEvent(regimen : DataCatalogo ) {
+      regimen.desDataCat = regimen.codDatacat+" " + regimen.desDataCat;      
+      console.log(regimen.desDataCat);
+    }
+
+
 
   /**Inicializando ****/
   get frmCtrlCodPaisPlaca() : AbstractControl {

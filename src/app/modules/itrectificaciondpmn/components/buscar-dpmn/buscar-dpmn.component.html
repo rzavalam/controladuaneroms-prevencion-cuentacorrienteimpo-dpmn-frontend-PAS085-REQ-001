@@ -20,16 +20,9 @@
                           <label class="col-form-label">Placa de vehículo:</label>
                         </div>
                         <div class="col-sm-4">
-
-                                                
-                            <select id="selPais" name="selPais" class="form-control form-select" aria-describedby="validationPaisPlaca"
-                            formControlName="codPaisPlaca" placeholder="Seleccionar" [ngClass]="{'is-invalid': frmCtrlCodPaisPlaca.errors?.required}">
-                            <option *ngFor="let pais of catalogoPais" [value]="pais.codDatacat">
-                              {{pais.codDatacat + "-" + pais.desDataCat}}
-                            </option>
-                            </select>
-
-
+                            <p-dropdown [filter]="true"  inputId="paisPlaca" [options]="catalogoPais" formControlName="codPaisPlaca" placeholder="Seleccionar  "
+                            optionLabel="desDataCat"  optionValue="codDatacat" [style] = "{'width':'100%'}">
+                            </p-dropdown>		  
                          </div>
                         <div class="col-sm-5">
                           <input type="text" class="form-control" id="txtNumeroPlaca" 
@@ -53,15 +46,15 @@
                       
                       <div class="row top-buffer">
                         <div class="col-sm-3 field-radiobutton">
-                          <p-radioButton (onClick)="onRadioChange()" name="tipoBusqueda" value="1" formControlName="tipoBusqueda"></p-radioButton>
+                          <p-radioButton (onClick)="onRadioChange()" name="tipoBusqueda" value="1" formControlName="tipoBusqueda" [(ngModel)]="selectedValue"></p-radioButton>
                           <label for="numDoc">Número de Documento:</label>
                         </div>
                         <div class="col-sm-4">
                           <p-dropdown inputId="codAduanaDocumento" [options]="catalogoAduanas" formControlName="codAduanaDocumento" placeholder="Seleccionar"
-                          optionValue="codDatacat"  [style] = "{'width':'100%'}">
-							              <ng-template let-aduanas pTemplate="item">
-                                <div>{{aduanas.codDatacat}}- {{aduanas.desDataCat}}</div>
-                            </ng-template>
+                              optionLabel="desDataCat"  optionValue="codDatacat"  [style] = "{'width':'100%'}">	
+                              <ng-template let-aduana pTemplate="item">
+                                <div>{{aduana.value.codDatacat}}-{{aduana.value.desDataCat}}</div>
+                              </ng-template>						              
 						                </p-dropdown>
                         </div>
                         
@@ -77,23 +70,22 @@
 
                       <div class="row top-buffer">
                         <div class="col-sm-3 field-radiobutton">
-                          <p-radioButton (onClick)="onRadioChange()" name="tipoBusqueda" value="2" formControlName="tipoBusqueda"></p-radioButton>
+                          <p-radioButton (onClick)="onRadioChange()" name="tipoBusqueda" value="2" formControlName="tipoBusqueda" [(ngModel)]="selectedValue"></p-radioButton>
                           <label for="declaracion">Declaración:</label>
                         </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                           <p-dropdown inputId="codAduanaDAM" [options]="catalogoAduanas"   formControlName="codAduanaDAM" placeholder="Seleccionar" 
-                            optionValue="codDatacat" [style] = "{'width':'100%'}">
-                              <ng-template let-aduanas pTemplate="item">
-                                 <div>{{aduanas.codDatacat}}- {{aduanas.desDataCat}}</div>
-                             </ng-template>						 
+                             optionLabel="desDataCat"  [style] = "{'width':'100%'}">   
+                             <ng-template let-aduana pTemplate="item">
+                              <div>{{aduana.value.codDatacat}}-{{aduana.value.desDataCat}}</div>
+                            </ng-template>                           					 
                           </p-dropdown>
                         </div>
-                        <div class="col-sm-2">
-                          <p-dropdown inputId="codRegimen" [options]="catalogoRegimen" formControlName="codRegimen" placeholder="Seleccionar"
-                            optionValue="codigo">
+                        <div class="col-sm-3">
+                          <p-dropdown  inputId="codRegimen" [options]="catalogoRegimen" formControlName="codRegimen" placeholder="Seleccionar"  [showClear]="true" optionLabel="desDataCat" [style] = "{'width':'100%'}">
                               <ng-template let-regimen pTemplate="item">
-                              <div>{{regimen.codDatacat}}- {{regimen.desDataCat}}</div>
-                            </ng-template>
+                                <div>{{regimen.value.codDatacat}}-{{regimen.value.desDataCat}}</div>
+                              </ng-template>
                            </p-dropdown>
                         </div>
                         <div class="col-sm-2">
@@ -106,7 +98,7 @@
 
                       <div class="row top-buffer">
                         <div class="col-sm-4 field-radiobutton">
-                          <p-radioButton (onClick)="onRadioChange()" name="tipoBusqueda" value="3" formControlName="tipoBusqueda" ></p-radioButton>
+                          <p-radioButton (onClick)="onRadioChange()" name="tipoBusqueda" value="3" formControlName="tipoBusqueda" [(ngModel)]="selectedValue"></p-radioButton>
                           <label for="fecRegistro">Fecha de Registro:</label>
                         </div>
                         <div class="col-sm-4">
